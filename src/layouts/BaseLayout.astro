@@ -33,6 +33,7 @@ const { title, description, image, publishedDate, type } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <Header />
@@ -40,5 +41,16 @@ const { title, description, image, publishedDate, type } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>
