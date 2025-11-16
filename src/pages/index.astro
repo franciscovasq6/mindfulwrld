@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogCard from '../components/BlogCard.astro';
 
@@ -8,6 +8,10 @@ const sortedPosts = allPosts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 const featuredPosts = sortedPosts.slice(0, 6);
+
+// Get homepage content from CMS
+const homeContent = await getEntry('pages', 'home');
+const { title, subtitle, description, buttonText, buttonLink } = homeContent.data;
 ---
 
 <BaseLayout
@@ -16,12 +20,12 @@ const featuredPosts = sortedPosts.slice(0, 6);
 >
   <section class="hero">
     <div class="container">
-      <h1>Welcome to mindfulwrld</h1>
-      <p class="hero-subtitle">Your journey to mindfulness starts here</p>
+      <h1>{title}</h1>
+      <p class="hero-subtitle">{subtitle}</p>
       <p class="hero-description">
-        Discover insights, tips, and inspiration for living a more mindful, intentional life.
+        {description}
       </p>
-      <a href="/blog" class="btn btn-primary">Explore Our Blog</a>
+      <a href={buttonLink} class="btn btn-primary">{buttonText}</a>
     </div>
   </section>
 

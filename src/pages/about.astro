@@ -1,5 +1,11 @@
 ---
+import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Get about page content from CMS
+const aboutContent = await getEntry('pages', 'about');
+const { title } = aboutContent.data;
+const { Content } = await aboutContent.render();
 ---
 
 <BaseLayout
@@ -9,50 +15,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="about-page">
     <div class="container">
       <div class="about-content">
-        <h1>About mindfulwrld</h1>
+        <h1>{title}</h1>
 
         <div class="prose">
-          <p>
-            Welcome to mindfulwrld, your companion on the journey to a more mindful,
-            intentional life.
-          </p>
-
-          <h2>Our Mission</h2>
-          <p>
-            We believe that mindfulness is the key to living a more fulfilling,
-            present, and joyful life. Through our blog, we share insights, tips,
-            and inspiration to help you cultivate mindfulness in your daily routine.
-          </p>
-
-          <h2>What We Write About</h2>
-          <p>
-            Our content covers a wide range of topics related to mindfulness and
-            wellness, including:
-          </p>
-
-          <ul>
-            <li>Meditation techniques and practices</li>
-            <li>Mindful living tips for everyday life</li>
-            <li>Mental health and emotional wellness</li>
-            <li>Self-care and personal growth</li>
-            <li>Stress management and relaxation</li>
-          </ul>
-
-          <h2>Join Our Community</h2>
-          <p>
-            Whether you're new to mindfulness or have been practicing for years,
-            we're here to support you on your journey. Explore our blog posts,
-            try our techniques, and discover what works best for you.
-          </p>
-
-          <p>
-            Thank you for being part of the mindfulwrld community. Together,
-            let's create a more mindful world.
-          </p>
-
-          <div class="cta">
-            <a href="/blog" class="btn btn-primary">Read Our Blog</a>
-          </div>
+          <Content />
         </div>
       </div>
     </div>

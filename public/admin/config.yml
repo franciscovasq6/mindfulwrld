@@ -8,6 +8,7 @@ media_folder: "public/images/blog"
 public_folder: "/images/blog"
 
 collections:
+  # Blog Posts Collection
   - name: "blog"
     label: "Blog Posts"
     folder: "src/content/blog"
@@ -21,3 +22,26 @@ collections:
       - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
       - { label: "Tags", name: "tags", widget: "list", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
+
+  # Pages Collection (Homepage & About)
+  - name: "pages"
+    label: "Pages"
+    files:
+      # Homepage
+      - label: "Homepage"
+        name: "home"
+        file: "src/content/pages/home.md"
+        fields:
+          - { label: "Main Title", name: "title", widget: "string", hint: "Large heading on homepage" }
+          - { label: "Subtitle", name: "subtitle", widget: "string", hint: "Pink text under title" }
+          - { label: "Description", name: "description", widget: "text", hint: "Gray text paragraph" }
+          - { label: "Button Text", name: "buttonText", widget: "string", default: "Explore Our Blog" }
+          - { label: "Button Link", name: "buttonLink", widget: "string", default: "/blog" }
+
+      # About Page
+      - label: "About Page"
+        name: "about"
+        file: "src/content/pages/about.md"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string" }
+          - { label: "Content", name: "body", widget: "markdown", hint: "Full about page content" }
