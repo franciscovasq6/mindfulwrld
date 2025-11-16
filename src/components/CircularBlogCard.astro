@@ -1,0 +1,90 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  url: string;
+}
+
+const { title, description, image, url } = Astro.props;
+---
+
+<div class="circular-card">
+  <a href={url} class="circular-image-link">
+    {image ? (
+      <img src={image} alt={title} class="circular-image" />
+    ) : (
+      <div class="circular-placeholder"></div>
+    )}
+  </a>
+  <h3><a href={url}>{title}</a></h3>
+  <p>{description}</p>
+  <a href={url} class="read-more">READ MORE</a>
+</div>
+
+<style>
+  .circular-card {
+    text-align: center;
+    max-width: 280px;
+  }
+
+  .circular-image-link {
+    display: block;
+    margin: 0 auto var(--space-4);
+  }
+
+  .circular-image,
+  .circular-placeholder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-base);
+  }
+
+  .circular-image:hover {
+    transform: scale(1.05);
+  }
+
+  .circular-placeholder {
+    background: linear-gradient(135deg, #E2689E, #61CE70);
+  }
+
+  .circular-card h3 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-2);
+  }
+
+  .circular-card h3 a {
+    color: var(--color-black);
+    text-decoration: none;
+  }
+
+  .circular-card h3 a:hover {
+    color: var(--color-primary);
+  }
+
+  .circular-card p {
+    font-size: var(--font-size-base);
+    color: var(--color-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-4);
+  }
+
+  .read-more {
+    display: inline-block;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.5px;
+    transition: color var(--transition-fast);
+  }
+
+  .read-more:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+  }
+</style>

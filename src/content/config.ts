@@ -10,6 +10,13 @@ const blogCollection = defineCollection({
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string().optional(),
     tags: z.array(z.string()).optional(),
+    // Location data for map
+    location: z.object({
+      lat: z.number(),
+      lng: z.number(),
+      name: z.string(),
+    }).optional(),
+    featured: z.boolean().default(false),
   }),
 });
 
@@ -21,6 +28,18 @@ const pagesCollection = defineCollection({
     description: z.string().optional(),
     buttonText: z.string().optional(),
     buttonLink: z.string().optional(),
+    // About Me section
+    aboutImage: z.string().optional(),
+    // Latest Video
+    videoId: z.string().optional(),
+    videoTitle: z.string().optional(),
+    // Socials
+    instagram: z.string().optional(),
+    instagramPersonal: z.string().optional(),
+    snapchat: z.string().optional(),
+    email: z.string().optional(),
+    // Hero images
+    heroImages: z.array(z.string()).optional(),
   }),
 });
 

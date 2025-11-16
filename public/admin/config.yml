@@ -4,8 +4,8 @@ backend:
 
 publish_mode: editorial_workflow
 
-media_folder: "public/images/blog"
-public_folder: "/images/blog"
+media_folder: "public/images"
+public_folder: "/images"
 
 collections:
   # Blog Posts Collection
@@ -16,27 +16,54 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "string" }
-      - { label: "Author", name: "author", widget: "string", default: "mindfulwrld" }
+      - { label: "Description", name: "description", widget: "string", hint: "Brief summary (120-160 characters)" }
+      - { label: "Author", name: "author", widget: "string", default: "Margarita" }
       - { label: "Publish Date", name: "pubDate", widget: "datetime" }
-      - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
-      - { label: "Tags", name: "tags", widget: "list", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Hero Image", name: "heroImage", widget: "image", required: false, hint: "Featured image for this post" }
+      - { label: "Tags", name: "tags", widget: "list", required: false, hint: "Topics (e.g., travel, packing, destination)" }
+      - { label: "Featured Post", name: "featured", widget: "boolean", default: false, hint: "Show on homepage?" }
+      - label: "Location (for map)"
+        name: "location"
+        widget: "object"
+        required: false
+        hint: "Add to make this post appear on the world map"
+        fields:
+          - { label: "Latitude", name: "lat", widget: "number", value_type: "float", hint: "e.g., 64.1466 (Iceland)" }
+          - { label: "Longitude", name: "lng", widget: "number", value_type: "float", hint: "e.g., -21.9426 (Iceland)" }
+          - { label: "Location Name", name: "name", widget: "string", hint: "e.g., Iceland, Paris, Tokyo" }
+      - { label: "Content", name: "body", widget: "markdown" }
 
-  # Pages Collection (Homepage & About)
+  # Pages Collection
   - name: "pages"
     label: "Pages"
     files:
-      # Homepage
+      # Homepage Settings
       - label: "Homepage"
         name: "home"
         file: "src/content/pages/home.md"
         fields:
-          - { label: "Main Title", name: "title", widget: "string", hint: "Large heading on homepage" }
-          - { label: "Subtitle", name: "subtitle", widget: "string", hint: "Pink text under title" }
-          - { label: "Description", name: "description", widget: "text", hint: "Gray text paragraph" }
-          - { label: "Button Text", name: "buttonText", widget: "string", default: "Explore Our Blog" }
-          - { label: "Button Link", name: "buttonLink", widget: "string", default: "/blog" }
+          - { label: "Site Title", name: "title", widget: "string", default: "Mindfulwrld", hint: "Main title overlay on hero" }
+          - { label: "Hero Images", name: "heroImages", widget: "list", required: false, hint: "4 images for hero collage", field: { label: "Image", name: "image", widget: "image" } }
+          - label: "About Me"
+            name: "body"
+            widget: "markdown"
+            hint: "Your bio text"
+          - { label: "About Photo", name: "aboutImage", widget: "image", required: false, hint: "Circular photo in About section" }
+          - { label: "Latest Video ID", name: "videoId", widget: "string", required: false, hint: "YouTube video ID (e.g., dQw4w9WgXcQ)" }
+          - { label: "Video Title", name: "videoTitle", widget: "string", default: "Latest Travel Vlog", required: false }
+          - label: "Social Media"
+            name: "socials"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Instagram", name: "instagram", widget: "string", default: "@MindfulWrld", required: false }
+              - { label: "Instagram Personal", name: "instagramPersonal", widget: "string", default: "@MindfulMarg", required: false }
+              - { label: "Snapchat", name: "snapchat", widget: "string", default: "@youfound_marg", required: false }
+              - { label: "Email", name: "email", widget: "string", default: "mindfulmargarita@gmail.com", required: false }
+          - { label: "Subtitle (legacy)", name: "subtitle", widget: "hidden", default: "" }
+          - { label: "Description (legacy)", name: "description", widget: "hidden", default: "" }
+          - { label: "Button Text (legacy)", name: "buttonText", widget: "hidden", default: "" }
+          - { label: "Button Link (legacy)", name: "buttonLink", widget: "hidden", default: "" }
 
       # About Page
       - label: "About Page"
