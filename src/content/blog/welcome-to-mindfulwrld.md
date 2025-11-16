@@ -1,9 +1,14 @@
 ---
-title: "Welcome to mindfulwrld"
-description: "Embark on your mindfulness journey with us. Learn what mindfulness means and how you can start practicing today."
-author: "mindfulwrld"
+title: Welcome to mindfulwrld
+description: Embark on your mindfulness journey with us. Learn what mindfulness
+  means and how you can start practicing today.
+author: mindfulwrld
 pubDate: 2025-01-15T10:00:00.000Z
-tags: ["mindfulness", "welcome", "getting started"]
+heroImage: /images/blog/header.png
+tags:
+  - mindfulness
+  - welcome
+  - getting started
 ---
 
 Welcome to mindfulwrld, your companion on the journey to a more mindful, intentional life.
