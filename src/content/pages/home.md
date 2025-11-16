@@ -6,7 +6,7 @@ heroImages:
   - /images/header.png
   - /images/header.png
   - /images/header.png
-aboutImage: /images/about-margarita.jpg
+aboutImage: /images/header.png
 videoId: ""
 videoTitle: Latest Travel Vlog
 description: ""
