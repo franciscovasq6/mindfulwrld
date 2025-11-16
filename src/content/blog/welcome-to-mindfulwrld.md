@@ -4,7 +4,7 @@ description: Embark on your mindfulness journey with us. Learn what mindfulness
   means and how you can start practicing today.
 author: mindfulwrld
 pubDate: 2025-01-15T10:00:00.000Z
-heroImage: /images/blog/header.png
+heroImage: ""
 tags:
   - mindfulness
   - welcome
