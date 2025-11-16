@@ -1,0 +1,98 @@
+---
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/about', label: 'About' }
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="/" class="logo">mindfulwrld</a>
+      <ul class="nav-list">
+        {navItems.map(item => (
+          <li>
+            <a
+              href={item.href}
+              class={currentPath === item.href || (item.href === '/blog' && currentPath.startsWith('/blog/')) ? 'active' : ''}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4) 0;
+  }
+
+  .logo {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .logo:hover {
+    color: var(--color-primary-dark);
+    text-decoration: none;
+  }
+
+  .nav-list {
+    display: flex;
+    gap: var(--space-8);
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-list a {
+    font-weight: 500;
+    color: var(--color-secondary);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--border-radius);
+    transition: all var(--transition-fast);
+  }
+
+  .nav-list a:hover {
+    color: var(--color-primary);
+    background-color: rgba(226, 104, 158, 0.1);
+    text-decoration: none;
+  }
+
+  .nav-list a.active {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .nav-list {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-4);
+    }
+  }
+</style>

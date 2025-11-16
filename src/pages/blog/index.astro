@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Blog"
+  description="Read our latest posts on mindfulness, wellness, and intentional living."
+>
+  <section class="blog-page">
+    <div class="container">
+      <div class="blog-header">
+        <h1>Blog</h1>
+        <p>Insights and inspiration for your mindful journey</p>
+      </div>
+
+      {sortedPosts.length === 0 ? (
+        <div class="no-posts">
+          <p>No blog posts yet. Check back soon!</p>
+        </div>
+      ) : (
+        <div class="posts-grid">
+          {sortedPosts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              heroImage={post.data.heroImage}
+              slug={post.slug}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-page {
+    padding: var(--space-16) 0;
+    min-height: 60vh;
+  }
+
+  .blog-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .blog-header h1 {
+    font-size: var(--font-size-5xl);
+    color: var(--color-black);
+    margin-bottom: var(--space-4);
+  }
+
+  .blog-header p {
+    font-size: var(--font-size-xl);
+    color: var(--color-secondary);
+    margin: 0;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .no-posts {
+    text-align: center;
+    padding: var(--space-16);
+    color: var(--color-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .blog-page {
+      padding: var(--space-12) 0;
+    }
+
+    .blog-header h1 {
+      font-size: var(--font-size-3xl);
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

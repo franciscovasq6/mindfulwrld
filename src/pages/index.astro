@@ -1,16 +1,119 @@
 ---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogCard from '../components/BlogCard.astro';
 
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const featuredPosts = sortedPosts.slice(0, 6);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="mindfulwrld"
+  description="Your journey to mindfulness. Discover insights, tips, and inspiration for a more mindful life."
+>
+  <section class="hero">
+    <div class="container">
+      <h1>Welcome to mindfulwrld</h1>
+      <p class="hero-subtitle">Your journey to mindfulness starts here</p>
+      <p class="hero-description">
+        Discover insights, tips, and inspiration for living a more mindful, intentional life.
+      </p>
+      <a href="/blog" class="btn btn-primary">Explore Our Blog</a>
+    </div>
+  </section>
+
+  <section class="featured-posts">
+    <div class="container">
+      <h2>Latest Posts</h2>
+      <div class="posts-grid">
+        {featuredPosts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            heroImage={post.data.heroImage}
+            slug={post.slug}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+      {sortedPosts.length > 6 && (
+        <div class="view-all">
+          <a href="/blog" class="btn btn-accent">View All Posts</a>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, rgba(226, 104, 158, 0.1) 0%, rgba(97, 206, 112, 0.1) 100%);
+    padding: var(--space-20) 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: var(--font-size-5xl);
+    color: var(--color-black);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-2xl);
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-secondary);
+    max-width: 600px;
+    margin: 0 auto var(--space-8);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .featured-posts {
+    padding: var(--space-20) 0;
+  }
+
+  .featured-posts h2 {
+    text-align: center;
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--space-12);
+    color: var(--color-black);
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-8);
+    margin-bottom: var(--space-12);
+  }
+
+  .view-all {
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--space-12) 0;
+    }
+
+    .hero h1 {
+      font-size: var(--font-size-3xl);
+    }
+
+    .hero-subtitle {
+      font-size: var(--font-size-xl);
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

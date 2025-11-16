@@ -1,0 +1,162 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  heroImage?: string;
+  author?: string;
+  tags?: string[];
+}
+
+const { title, description, pubDate, heroImage, author = 'mindfulwrld', tags } = Astro.props;
+
+const formattedDate = new Date(pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={heroImage}
+  publishedDate={pubDate}
+  type="article"
+>
+  <article class="blog-post">
+    <div class="container">
+      <div class="blog-post-header">
+        <h1>{title}</h1>
+
+        <div class="blog-post-meta">
+          <span class="author">By {author}</span>
+          <span class="separator">•</span>
+          <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        </div>
+
+        {tags && tags.length > 0 && (
+          <div class="blog-post-tags">
+            {tags.map(tag => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {heroImage && (
+        <div class="blog-post-image">
+          <img src={heroImage} alt={title} />
+        </div>
+      )}
+
+      <div class="blog-post-content prose">
+        <slot />
+      </div>
+
+      <div class="blog-post-footer">
+        <a href="/blog" class="back-link">← Back to Blog</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .blog-post {
+    padding: var(--space-16) 0;
+  }
+
+  .blog-post-header {
+    max-width: var(--max-width-prose);
+    margin: 0 auto var(--space-12);
+  }
+
+  .blog-post-header h1 {
+    font-size: var(--font-size-5xl);
+    color: var(--color-black);
+    margin-bottom: var(--space-6);
+    line-height: var(--line-height-tight);
+  }
+
+  .blog-post-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--font-size-base);
+    color: var(--color-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  .author {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .separator {
+    color: var(--color-gray-300);
+  }
+
+  .blog-post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tag {
+    font-size: var(--font-size-sm);
+    padding: var(--space-1) var(--space-3);
+    background-color: rgba(97, 206, 112, 0.1);
+    color: var(--color-accent-dark);
+    border-radius: var(--border-radius);
+    font-weight: 500;
+  }
+
+  .blog-post-image {
+    max-width: var(--max-width-prose);
+    margin: 0 auto var(--space-12);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .blog-post-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .blog-post-content {
+    margin: 0 auto;
+  }
+
+  .blog-post-footer {
+    max-width: var(--max-width-prose);
+    margin: var(--space-16) auto 0;
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-gray-200);
+  }
+
+  .back-link {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .back-link:hover {
+    color: var(--color-primary-dark);
+    transform: translateX(-4px);
+  }
+
+  @media (max-width: 768px) {
+    .blog-post {
+      padding: var(--space-12) 0;
+    }
+
+    .blog-post-header h1 {
+      font-size: var(--font-size-3xl);
+    }
+  }
+</style>

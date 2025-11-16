@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="Learn more about mindfulwrld and our mission to promote mindfulness and intentional living."
+>
+  <section class="about-page">
+    <div class="container">
+      <div class="about-content">
+        <h1>About mindfulwrld</h1>
+
+        <div class="prose">
+          <p>
+            Welcome to mindfulwrld, your companion on the journey to a more mindful,
+            intentional life.
+          </p>
+
+          <h2>Our Mission</h2>
+          <p>
+            We believe that mindfulness is the key to living a more fulfilling,
+            present, and joyful life. Through our blog, we share insights, tips,
+            and inspiration to help you cultivate mindfulness in your daily routine.
+          </p>
+
+          <h2>What We Write About</h2>
+          <p>
+            Our content covers a wide range of topics related to mindfulness and
+            wellness, including:
+          </p>
+
+          <ul>
+            <li>Meditation techniques and practices</li>
+            <li>Mindful living tips for everyday life</li>
+            <li>Mental health and emotional wellness</li>
+            <li>Self-care and personal growth</li>
+            <li>Stress management and relaxation</li>
+          </ul>
+
+          <h2>Join Our Community</h2>
+          <p>
+            Whether you're new to mindfulness or have been practicing for years,
+            we're here to support you on your journey. Explore our blog posts,
+            try our techniques, and discover what works best for you.
+          </p>
+
+          <p>
+            Thank you for being part of the mindfulwrld community. Together,
+            let's create a more mindful world.
+          </p>
+
+          <div class="cta">
+            <a href="/blog" class="btn btn-primary">Read Our Blog</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-page {
+    padding: var(--space-16) 0;
+    min-height: 60vh;
+  }
+
+  .about-content {
+    max-width: var(--max-width-prose);
+    margin: 0 auto;
+  }
+
+  .about-content h1 {
+    font-size: var(--font-size-5xl);
+    color: var(--color-black);
+    margin-bottom: var(--space-8);
+    text-align: center;
+  }
+
+  .cta {
+    margin-top: var(--space-12);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .about-page {
+      padding: var(--space-12) 0;
+    }
+
+    .about-content h1 {
+      font-size: var(--font-size-3xl);
+    }
+  }
+</style>
