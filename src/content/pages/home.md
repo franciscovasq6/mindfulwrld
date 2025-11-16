@@ -3,6 +3,9 @@ snapchat: "@youfound_marg"
 title: Mindfulwrld
 heroImages:
   - /images/header.png
+  - /images/header.png
+  - /images/header.png
+  - /images/header.png
 aboutImage: /images/about-margarita.jpg
 videoId: ""
 videoTitle: Latest Travel Vlog
